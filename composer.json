@@ -5,7 +5,9 @@
     "keywords": [
         "naming",
         "people",
-        "name"
+        "name",
+        "multibyte",
+        "mbstring"
     ],
     "homepage": "https://github.com/samsonasik/Naming",
     "license": "MIT",

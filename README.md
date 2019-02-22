@@ -27,14 +27,14 @@ Filter Flow
 
 Examples:
 
-| Original name    | Filtered name
-|------------------|-----------------
-| ABduL            | Abdul
-| aBDUL m. ikHsan  | Abdul M. Ikhsan
-| abdul Malik  I   | Abdul Malik I
-| D'lilah          | D'Lilah
-| Veli-matti       | Veli-Matti
-| äX               | Äx
+| Original name                    | Filtered name
+|----------------------------------|-----------------
+| ABduL                            | Abdul
+| aBDUL m. ikHsan                  | Abdul M. Ikhsan
+| abdul Malik&nbsp;&nbsp;&nbsp;I   | Abdul Malik I
+| D'lilah                          | D'Lilah
+| Veli-matti                       | Veli-Matti
+| äX                               | Äx
 
 Validation checks
 -----------------

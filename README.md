@@ -7,7 +7,7 @@ Naming
 [![PHPStan](https://img.shields.io/badge/style-level%20max-brightgreen.svg?style=flat-square&label=phpstan)](https://github.com/phpstan/phpstan)
 [![Downloads](https://img.shields.io/packagist/dt/samsonasik/naming.svg?style=flat-square)](https://packagist.org/packages/samsonasik/naming)
 
-Naming is a filter and validator for people name with multibyte string check support, extends the [`ZF`](https://framework.zend.com/) filter and validator, while it can be used as standalone.
+Naming is a library that has filter and validator for people name with multibyte string check support, extends the [`ZF`](https://framework.zend.com/) filter and validator, while it can be used as standalone.
 
 Installation
 ------------

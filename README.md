@@ -29,7 +29,7 @@ Examples:
 
 | Original name                    | Filtered name
 |----------------------------------|-----------------
-| <script>Abdul                    | Abdul
+| \<script>Abdul                    | Abdul
 | ABduL                            | Abdul
 | aBDUL m. ikHsan                  | Abdul M. Ikhsan
 | abdul Malik&nbsp;&nbsp;&nbsp;I   | Abdul Malik I

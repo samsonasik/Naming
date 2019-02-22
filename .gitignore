@@ -1,0 +1,8 @@
+vendor
+composer.lock
+coverage/
+coverage.json
+bin
+.php_cs.cache
+.vscode/
+build/logs/*

@@ -1,0 +1,49 @@
+{
+    "name": "samsonasik/naming",
+    "type": "library",
+    "description": "Naming Filter and Validator for people name",
+    "keywords": [
+        "naming"
+    ],
+    "homepage": "https://github.com/samsonasik/Naming",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Abdul Malik Ikhsan",
+            "email": "samsonasik@gmail.com",
+            "homepage": "http://samsonasik.wordpress.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.2",
+        "symfony/polyfill-mbstring": "^1.10",
+        "webmozart/assert": "^1.4",
+        "zendframework/zend-filter": "^2.9",
+        "zendframework/zend-validator": "^2.12"
+    },
+    "require-dev": {
+        "kahlan/kahlan": "^4.1.1",
+        "phpstan/phpstan": "^0.11",
+        "phpstan/phpstan-webmozart-assert": "^0.11.0",
+        "zendframework/zend-coding-standard": "^1.0"
+    },
+    "config": {
+        "bin-dir": "bin",
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Naming\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Naming\\Spec\\": "spec/"
+        }
+    },
+    "scripts": {
+        "cs-check": "phpcs",
+        "cs-fix": "phpcbf"
+    }
+}

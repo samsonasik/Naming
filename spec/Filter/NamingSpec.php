@@ -1,0 +1,33 @@
+<?php
+
+namespace Naming\Spec\Filter;
+
+use Naming\Filter\Naming;
+
+describe('Naming', function () {
+
+    describe('filter()', function () {
+
+        it('set striptags, trim, and strip double space with ucwords with set lower first, upper after apostrophe and hyphen', function () {
+
+            $maps = [
+                '<ABduL>'          => '',
+                'Abdul  '          => 'Abdul',
+                'ABduL'            => 'Abdul',
+                'aBDUL m. ikHsan'  => 'Abdul M. Ikhsan',
+                'abdul Malik  I'   => 'Abdul Malik I',
+                'D\'lilah'         => 'D\'Lilah',
+                'äX'               => 'Äx',
+                'Veli-matti'       => 'Veli-Matti',
+            ];
+
+            $naming = new Naming();
+            foreach ($maps as $key => $value) {
+                expect($naming->filter($key))->toBe($value);
+            }
+
+        });
+
+    });
+
+});

@@ -9,14 +9,14 @@ use Zend\Validator\AbstractValidator;
 
 class Naming extends AbstractValidator
 {
-    private const SPECIAL                = 'SPECIAL';
-    private const SINGLE_DOT             = 'SINGLE_DOT';
-    private const SINGLE_HYPHEN          = 'SINGLE_HYPHEN';
-    private const SINGLE_APOSTROPHE      = 'SINGLE_APOSTROPHE';
-    private const CONSECUTIVE_DOT        = 'CONSECUTIVE_DOT';
-    private const CONSECUTIVE_HYPHEN     = 'CONSECUTIVE_HYPHEN';
-    private const CONSECUTIVE_APOSTROPHE = 'CONSECUTIVE_APOSTROPHE';
-    private const DOT_TOBE_IN_LAST_WORD  = 'DOT_TOBE_IN_LAST_WORD';
+    const SPECIAL                = 'SPECIAL';
+    const SINGLE_DOT             = 'SINGLE_DOT';
+    const SINGLE_HYPHEN          = 'SINGLE_HYPHEN';
+    const SINGLE_APOSTROPHE      = 'SINGLE_APOSTROPHE';
+    const CONSECUTIVE_DOT        = 'CONSECUTIVE_DOT';
+    const CONSECUTIVE_HYPHEN     = 'CONSECUTIVE_HYPHEN';
+    const CONSECUTIVE_APOSTROPHE = 'CONSECUTIVE_APOSTROPHE';
+    const DOT_TOBE_IN_LAST_WORD  = 'DOT_TOBE_IN_LAST_WORD';
 
     protected $messageTemplates = [
         self::SPECIAL                => 'Names can contain only letters, hyphens, apostrophe, spaces & full stops',

@@ -11,7 +11,7 @@ describe('Naming', function () {
         it('set striptags, trim, and strip double space with ucwords with set lower first, upper after apostrophe and hyphen', function () {
 
             $maps = [
-                '<ABduL>'          => '',
+                '<script>Abdul'    => 'Abdul',
                 'Abdul  '          => 'Abdul',
                 'ABduL'            => 'Abdul',
                 'aBDUL m. ikHsan'  => 'Abdul M. Ikhsan',

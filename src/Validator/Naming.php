@@ -9,7 +9,7 @@ use Zend\Validator\AbstractValidator;
 
 class Naming extends AbstractValidator
 {
-    const SPECIAL                = 'SPECIAL';
+    const SPECIAL_OR_NUMBER      = 'SPECIAL_OR_NUMBER';
     const SINGLE_DOT             = 'SINGLE_DOT';
     const SINGLE_HYPHEN          = 'SINGLE_HYPHEN';
     const SINGLE_APOSTROPHE      = 'SINGLE_APOSTROPHE';
@@ -19,7 +19,7 @@ class Naming extends AbstractValidator
     const DOT_TOBE_IN_LAST_WORD  = 'DOT_TOBE_IN_LAST_WORD';
 
     protected $messageTemplates = [
-        self::SPECIAL                => 'Names can contain only letters, hyphens, apostrophe, spaces & full stops',
+        self::SPECIAL_OR_NUMBER      => 'Names can contain only letters, hyphens, apostrophe, spaces & full stops',
         self::SINGLE_DOT             => 'Single "." character is not allowed',
         self::SINGLE_HYPHEN          => 'Single "-" character is not allowed',
         self::SINGLE_APOSTROPHE      => 'Single "\'" character is not allowed',
@@ -41,7 +41,7 @@ class Naming extends AbstractValidator
 
         $specs = \preg_match("/^[-. '\p{L}]+$/u", $value);
         if (! $specs) {
-            $this->error(self::SPECIAL);
+            $this->error(self::SPECIAL_OR_NUMBER);
             return false;
         }
 

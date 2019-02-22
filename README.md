@@ -48,7 +48,7 @@ Validation checks
    - consecutive `.` characters
    - consecutive `-` characters
    - consecutive `'` characters
-   - full stops not in the last word
+   - full stops not in the last of each word
 
 Usage with zend-form instance:
 

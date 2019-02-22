@@ -9,6 +9,13 @@ Naming
 
 Naming is a filter and validator for people name with multibyte string check support, extends the [`ZF`](https://framework.zend.com/) filter and validator, while it can be used as standalone.
 
+Installation
+------------
+
+```sh
+composer require samsonasik/naming
+```
+
 Filter Flow
 -----------
 

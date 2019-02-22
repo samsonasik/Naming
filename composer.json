@@ -3,7 +3,9 @@
     "type": "library",
     "description": "Naming Filter and Validator for people name",
     "keywords": [
-        "naming"
+        "naming",
+        "people",
+        "name"
     ],
     "homepage": "https://github.com/samsonasik/Naming",
     "license": "MIT",

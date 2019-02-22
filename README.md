@@ -119,3 +119,7 @@ echo $filtered; // Abdul....
 var_dump($validator->isValid($filtered)); // false
 var_dump(\current($validator->getMessages())); /* "Consecutive "."s are not allowed" */
 ```
+
+Contributing
+------------
+Contributions are very welcome. Please read [CONTRIBUTING.md](https://github.com/samsonasik/Naming/blob/master/CONTRIBUTING.md)

@@ -34,7 +34,7 @@ class Naming extends AbstractValidator
         parent::__construct($options);
     }
 
-    public function isValid($value)
+    public function isValid($value) : bool
     {
         Assert::string($value);
         $this->setValue($value);

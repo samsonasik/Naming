@@ -11,7 +11,7 @@ use Zend\Filter\StripTags;
 
 class Naming extends AbstractFilter
 {
-    public function filter($value)
+    public function filter($value) : string
     {
         $value = (new StripTags())->filter($value);
         $value = (new StringTrim())->filter($value);

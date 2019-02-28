@@ -46,7 +46,7 @@ describe('Naming', function () {
 
             foreach ($namings as $naming) {
                 $actual = $this->validator->isValid($naming);
-                expect($actual)->toBe(false);
+                expect($actual)->toBeFalsy();
             }
 
         });
@@ -65,7 +65,7 @@ describe('Naming', function () {
 
             foreach ($namings as $naming) {
                 $actual = $this->validator->isValid($naming);
-                expect($actual)->toBe(true);
+                expect($actual)->toBeTruthy();
             }
 
         });

@@ -23,8 +23,8 @@ class Naming extends AbstractFilter
         $chars = ['\'', '-'];
         \array_walk($chars, function ($row) use (& $value) {
             $position = \mb_strpos($value, $row);
-            if ($position !== false && isset($value{$position + 1})) {
-                $value{$position + 1} = \mb_strtoupper($value{$position + 1});
+            if ($position !== false && isset($value[$position + 1])) {
+                $value[$position + 1] = \mb_strtoupper($value[$position + 1]);
             }
         });
 

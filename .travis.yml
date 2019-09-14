@@ -5,8 +5,9 @@ group: edge
 php:
   - 7.2
   - 7.3
+  - 7.4snapshot
   - nightly
-
+  
 before_script:
   - mkdir -p build/logs
   - composer self-update
@@ -25,4 +26,5 @@ notifications:
 
 matrix:
   allow_failures:
+    - php: 7.4snapshot
     - php: nightly

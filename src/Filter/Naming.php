@@ -4,19 +4,28 @@ declare(strict_types=1);
 
 namespace Naming\Filter;
 
+use Laminas\Filter\AbstractFilter;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\StripTags;
 use Webmozart\Assert\Assert;
-use Zend\Filter\AbstractFilter;
-use Zend\Filter\StringTrim;
-use Zend\Filter\StripTags;
+
+use function array_walk;
+use function mb_convert_case;
+use function mb_strpos;
+use function mb_strtoupper;
+use function preg_replace;
+
+use const MB_CASE_TITLE;
 
 class Naming extends AbstractFilter
 {
-    public function filter($value) : string
+    /** @param string $value */
+    public function filter($value): string
     {
         $value = (new StripTags())->filter($value);
         $value = (new StringTrim())->filter($value);
-        $value = \mb_convert_case($value, \MB_CASE_TITLE, 'UTF-8');
-        $value = \preg_replace('/\s{2,}/', ' ', $value);
+        $value = mb_convert_case($value, MB_CASE_TITLE, 'UTF-8');
+        $value = preg_replace('/\s{2,}/', ' ', $value);
 
         Assert::string($value);
 

@@ -4,19 +4,29 @@ declare(strict_types=1);
 
 namespace Naming\Validator;
 
+use Laminas\Validator\AbstractValidator;
 use Webmozart\Assert\Assert;
-use Zend\Validator\AbstractValidator;
+
+use function array_filter;
+use function array_keys;
+use function current;
+use function in_array;
+use function mb_strlen;
+use function preg_match;
+use function strpos;
+
+use const ARRAY_FILTER_USE_KEY;
 
 class Naming extends AbstractValidator
 {
-    const SPECIAL_OR_NUMBER      = 'SPECIAL_OR_NUMBER';
-    const SINGLE_DOT             = 'SINGLE_DOT';
-    const SINGLE_HYPHEN          = 'SINGLE_HYPHEN';
-    const SINGLE_APOSTROPHE      = 'SINGLE_APOSTROPHE';
-    const CONSECUTIVE_DOT        = 'CONSECUTIVE_DOT';
-    const CONSECUTIVE_HYPHEN     = 'CONSECUTIVE_HYPHEN';
-    const CONSECUTIVE_APOSTROPHE = 'CONSECUTIVE_APOSTROPHE';
-    const DOT_TOBE_IN_LAST_WORD  = 'DOT_TOBE_IN_LAST_WORD';
+    public const SPECIAL_OR_NUMBER      = 'SPECIAL_OR_NUMBER';
+    public const SINGLE_DOT             = 'SINGLE_DOT';
+    public const SINGLE_HYPHEN          = 'SINGLE_HYPHEN';
+    public const SINGLE_APOSTROPHE      = 'SINGLE_APOSTROPHE';
+    public const CONSECUTIVE_DOT        = 'CONSECUTIVE_DOT';
+    public const CONSECUTIVE_HYPHEN     = 'CONSECUTIVE_HYPHEN';
+    public const CONSECUTIVE_APOSTROPHE = 'CONSECUTIVE_APOSTROPHE';
+    public const DOT_TOBE_IN_LAST_WORD  = 'DOT_TOBE_IN_LAST_WORD';
 
     protected $messageTemplates = [
         self::SPECIAL_OR_NUMBER      => 'Names can contain only letters, hyphens, apostrophe, spaces & full stops',
@@ -34,18 +44,19 @@ class Naming extends AbstractValidator
         parent::__construct($options);
     }
 
-    public function isValid($value) : bool
+    /** @param string $value */
+    public function isValid($value): bool
     {
         Assert::string($value);
         $this->setValue($value);
 
-        $specs = \preg_match("/^[-. '\p{L}]+$/u", $value);
+        $specs = preg_match("/^[-. '\p{L}]+$/u", $value);
         if (! $specs) {
             $this->error(self::SPECIAL_OR_NUMBER);
             return false;
         }
 
-        $length = \mb_strlen($value);
+        $length = mb_strlen($value);
         if ($length === 1) {
             $messageTemplates = [
                 '.'  => self::SINGLE_DOT,
@@ -53,7 +64,7 @@ class Naming extends AbstractValidator
                 '\'' => self::SINGLE_APOSTROPHE,
             ];
 
-            if (\in_array($value, \array_keys($messageTemplates), true)) {
+            if (in_array($value, array_keys($messageTemplates), true)) {
                 $this->error($messageTemplates[$value]);
                 return false;
             }
@@ -64,17 +75,17 @@ class Naming extends AbstractValidator
                 '\'\'' => self::CONSECUTIVE_APOSTROPHE,
             ];
 
-            $error = \array_filter($messageTemplates, function ($key) use ($value) {
-                return \strpos($value, $key) !== false;
-            }, \ARRAY_FILTER_USE_KEY);
+            $error = array_filter($messageTemplates, function ($key) use ($value) {
+                return strpos($value, $key) !== false;
+            }, ARRAY_FILTER_USE_KEY);
 
             if ($error) {
-                $this->error(\current($error));
+                $this->error(current($error));
                 return false;
             }
         }
 
-        $specs = \preg_match("/(?:\.['\p{L}-]+|\s\.|^\.)/u", $value);
+        $specs = preg_match("/(?:\.['\p{L}-]+|\s\.|^\.)/u", $value);
         if ($specs) {
             $this->error(self::DOT_TOBE_IN_LAST_WORD);
             return false;

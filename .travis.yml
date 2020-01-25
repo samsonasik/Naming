@@ -5,9 +5,8 @@ group: edge
 php:
   - 7.2
   - 7.3
-  - 7.4snapshot
-  - nightly
-  
+  - 7.4
+
 before_script:
   - mkdir -p build/logs
   - composer self-update
@@ -16,15 +15,9 @@ before_script:
 
 script:
   - composer cs-check
-  - if [[ $TRAVIS_PHP_VERSION = 7.2 ]]; then bin/phpstan analyse src/ --level=max -c phpstan.neon; fi
-  - if [[ $TRAVIS_PHP_VERSION != "nightly" ]]; then bin/kahlan --coverage=4 --reporter=verbose --clover=build/logs/clover.xml; fi
-  - if [[ $TRAVIS_PHP_VERSION = "nightly" ]]; then bin/kahlan; fi
-  - if [[ $TRAVIS_PHP_VERSION = 7.2 ]]; then bin/php-coveralls -v --exclude-no-stmt; fi
+  - bin/phpstan analyse src/ --level=max -c phpstan.neon
+  - bin/kahlan --coverage=4 --reporter=verbose --clover=build/logs/clover.xml
+  - bin/php-coveralls -v --exclude-no-stmt
 
 notifications:
   email: false
-
-matrix:
-  allow_failures:
-    - php: 7.4snapshot
-    - php: nightly

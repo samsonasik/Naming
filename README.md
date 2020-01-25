@@ -57,9 +57,9 @@ Usage with zend-form instance:
 ```php
 use Naming\Filter;
 use Naming\Validator;
-use Zend\Form\Element\Text;
-use Zend\Form\Form;
-use Zend\InputFilter\InputFilterProviderInterface;
+use Laminas\Form\Element\Text;
+use Laminas\Form\Form;
+use Laminas\InputFilter\InputFilterProviderInterface;
 
 class ContactForm extends Form implements InputFilterProviderInterface
 {

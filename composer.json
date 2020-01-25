@@ -49,10 +49,10 @@
             "Naming\\Spec\\": "spec/"
         }
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "scripts": {
         "cs-check": "phpcs",
         "cs-fix": "phpcbf"
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }

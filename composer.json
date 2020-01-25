@@ -7,7 +7,8 @@
         "people",
         "name",
         "multibyte",
-        "mbstring"
+        "mbstring",
+        "laminas"
     ],
     "homepage": "https://github.com/samsonasik/Naming",
     "license": "MIT",

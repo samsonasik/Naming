@@ -28,7 +28,7 @@
         "webmozart/assert": "^1.4"
     },
     "require-dev": {
-        "kahlan/kahlan": "^4.1.1",
+        "kahlan/kahlan": "^4.7.2",
         "laminas/laminas-coding-standard": "^2.0",
         "php-coveralls/php-coveralls": "^2.1",
         "phpstan/phpstan": "^0.11",

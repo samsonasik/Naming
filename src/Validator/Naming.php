@@ -40,6 +40,9 @@ class Naming extends AbstractValidator
         self::DOT_TOBE_IN_LAST_WORD  => '"." must be at last word character',
     ];
 
+    /**
+     * @param mixed[] $options
+     */
     public function __construct(array $options = [])
     {
         parent::__construct($options);

@@ -28,6 +28,7 @@ class Naming extends AbstractValidator
     public const CONSECUTIVE_APOSTROPHE = 'CONSECUTIVE_APOSTROPHE';
     public const DOT_TOBE_IN_LAST_WORD  = 'DOT_TOBE_IN_LAST_WORD';
 
+    /** @var array<string, string> */
     protected $messageTemplates = [
         self::SPECIAL_OR_NUMBER      => 'Names can contain only letters, hyphens, apostrophe, spaces & full stops',
         self::SINGLE_DOT             => 'Single "." character is not allowed',

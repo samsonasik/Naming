@@ -3,7 +3,7 @@ Naming
 
 [![Latest Version](https://img.shields.io/github/release/samsonasik/Naming.svg?style=flat-square)](https://github.com/samsonasik/Naming/releases)
 ![ci build](https://github.com/samsonasik/Naming/workflows/ci%20build/badge.svg)
-[![Code Coverage](https://codecov.io/gh/samsonasik/Naming/branch/master/graph/badge.svg)](https://codecov.io/gh/samsonasik/ForceHttpsModule)
+[![Code Coverage](https://codecov.io/gh/samsonasik/Naming/branch/master/graph/badge.svg)](https://codecov.io/gh/samsonasik/Naming)
 [![PHPStan](https://img.shields.io/badge/style-level%20max-brightgreen.svg?style=flat-square&label=phpstan)](https://github.com/phpstan/phpstan)
 [![Downloads](https://img.shields.io/packagist/dt/samsonasik/naming.svg?style=flat-square)](https://packagist.org/packages/samsonasik/naming)
 

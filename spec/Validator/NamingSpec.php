@@ -12,9 +12,9 @@ describe('Naming', function () {
 
     });
 
-    describe('->isValid', function () {
+    describe('->isValid', function (): void {
 
-        it('returns false for incorrect naming', function () {
+        it('returns false for incorrect naming', function (): void {
 
             $namings = [
                 // include special character(s)
@@ -35,11 +35,11 @@ describe('Naming', function () {
                 // single strlen($value) === 1 condition
                 '.',
                 '-',
-                '\'',
+                "'",
 
                 // consecutive value == -,',.
                 '--',
-                '\'\'',
+                "''",
                 '...',
                 'Foo.....',
             ];
@@ -51,14 +51,14 @@ describe('Naming', function () {
 
         });
 
-        it('returns true for correct naming', function () {
+        it('returns true for correct naming', function (): void {
 
             $namings = [
                 'abdul malik ikhsan',
                 'abdul m. ikhsan',
                 'abdul',
                 'M.',
-                'D\'Lilah',
+                "D'Lilah",
                 'Veli-Matti',
                 'Setälä',
             ];

@@ -2,8 +2,8 @@ Naming
 ======
 
 [![Latest Version](https://img.shields.io/github/release/samsonasik/Naming.svg?style=flat-square)](https://github.com/samsonasik/Naming/releases)
-[![Build Status](https://travis-ci.org/samsonasik/Naming.svg?branch=master)](https://travis-ci.org/samsonasik/Naming)
-[![Coverage Status](https://coveralls.io/repos/github/samsonasik/Naming/badge.svg?branch=master)](https://coveralls.io/github/samsonasik/Naming?branch=master)
+![ci build](https://github.com/samsonasik/ForceHttpsModule/workflows/ci%20build/badge.svg)
+[![Code Coverage](https://codecov.io/gh/samsonasik/ForceHttpsModule/branch/master/graph/badge.svg)](https://codecov.io/gh/samsonasik/ForceHttpsModule)
 [![PHPStan](https://img.shields.io/badge/style-level%20max-brightgreen.svg?style=flat-square&label=phpstan)](https://github.com/phpstan/phpstan)
 [![Downloads](https://img.shields.io/packagist/dt/samsonasik/naming.svg?style=flat-square)](https://packagist.org/packages/samsonasik/naming)
 

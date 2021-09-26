@@ -8,9 +8,8 @@ use Laminas\Validator\AbstractValidator;
 use Webmozart\Assert\Assert;
 
 use function array_filter;
-use function array_keys;
+use function array_key_exists;
 use function current;
-use function in_array;
 use function mb_strlen;
 use function preg_match;
 use function strpos;
@@ -19,14 +18,45 @@ use const ARRAY_FILTER_USE_KEY;
 
 class Naming extends AbstractValidator
 {
-    public const SPECIAL_OR_NUMBER      = 'SPECIAL_OR_NUMBER';
-    public const SINGLE_DOT             = 'SINGLE_DOT';
-    public const SINGLE_HYPHEN          = 'SINGLE_HYPHEN';
-    public const SINGLE_APOSTROPHE      = 'SINGLE_APOSTROPHE';
-    public const CONSECUTIVE_DOT        = 'CONSECUTIVE_DOT';
-    public const CONSECUTIVE_HYPHEN     = 'CONSECUTIVE_HYPHEN';
+    /**
+     * @var string
+     */
+    public const SPECIAL_OR_NUMBER = 'SPECIAL_OR_NUMBER';
+
+    /**
+     * @var string
+     */
+    public const SINGLE_DOT = 'SINGLE_DOT';
+
+    /**
+     * @var string
+     */
+    public const SINGLE_HYPHEN = 'SINGLE_HYPHEN';
+
+    /**
+     * @var string
+     */
+    public const SINGLE_APOSTROPHE = 'SINGLE_APOSTROPHE';
+
+    /**
+     * @var string
+     */
+    public const CONSECUTIVE_DOT = 'CONSECUTIVE_DOT';
+
+    /**
+     * @var string
+     */
+    public const CONSECUTIVE_HYPHEN = 'CONSECUTIVE_HYPHEN';
+
+    /**
+     * @var string
+     */
     public const CONSECUTIVE_APOSTROPHE = 'CONSECUTIVE_APOSTROPHE';
-    public const DOT_TOBE_IN_LAST_WORD  = 'DOT_TOBE_IN_LAST_WORD';
+
+    /**
+     * @var string
+     */
+    public const DOT_TOBE_IN_LAST_WORD = 'DOT_TOBE_IN_LAST_WORD';
 
     /** @var array<string, string> */
     protected $messageTemplates = [
@@ -63,27 +93,27 @@ class Naming extends AbstractValidator
         $length = mb_strlen($value);
         if ($length === 1) {
             $messageTemplates = [
-                '.'  => self::SINGLE_DOT,
-                '-'  => self::SINGLE_HYPHEN,
-                '\'' => self::SINGLE_APOSTROPHE,
+                '.' => self::SINGLE_DOT,
+                '-' => self::SINGLE_HYPHEN,
+                "'" => self::SINGLE_APOSTROPHE,
             ];
 
-            if (in_array($value, array_keys($messageTemplates), true)) {
+            if (array_key_exists($value, $messageTemplates)) {
                 $this->error($messageTemplates[$value]);
                 return false;
             }
         } else {
             $messageTemplates = [
-                '..'   => self::CONSECUTIVE_DOT,
-                '--'   => self::CONSECUTIVE_HYPHEN,
-                '\'\'' => self::CONSECUTIVE_APOSTROPHE,
+                '..' => self::CONSECUTIVE_DOT,
+                '--' => self::CONSECUTIVE_HYPHEN,
+                "''" => self::CONSECUTIVE_APOSTROPHE,
             ];
 
-            $error = array_filter($messageTemplates, function ($key) use ($value) {
+            $error = array_filter($messageTemplates, function ($key) use ($value): bool {
                 return strpos($value, $key) !== false;
             }, ARRAY_FILTER_USE_KEY);
 
-            if ($error) {
+            if ($error !== []) {
                 $this->error(current($error));
                 return false;
             }

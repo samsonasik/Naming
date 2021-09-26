@@ -4,11 +4,11 @@ namespace Naming\Spec\Filter;
 
 use Naming\Filter\Naming;
 
-describe('Naming', function () {
+describe('Naming', function (): void {
 
-    describe('filter()', function () {
+    describe('filter()', function (): void {
 
-        it('set striptags, trim, and strip double space with ucwords with set lower first, upper after apostrophe and hyphen', function () {
+        it('set striptags, trim, and strip double space with ucwords with set lower first, upper after apostrophe and hyphen', function (): void {
 
             $maps = [
                 '<script>Abdul'    => 'Abdul',
@@ -16,7 +16,7 @@ describe('Naming', function () {
                 'ABduL'            => 'Abdul',
                 'aBDUL m. ikHsan'  => 'Abdul M. Ikhsan',
                 'abdul Malik  I'   => 'Abdul Malik I',
-                'D\'lilah'         => 'D\'Lilah',
+                "D'lilah"         => "D'Lilah",
                 'äX'               => 'Äx',
                 'Veli-matti'       => 'Veli-Matti',
             ];

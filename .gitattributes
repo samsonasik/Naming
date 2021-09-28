@@ -7,3 +7,4 @@
 /spec/ export-ignore
 /CONTRIBUTING.md export-ignore
 /phpcs.xml export-ignore
+/rector.php export-ignore

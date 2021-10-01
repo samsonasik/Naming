@@ -1,11 +1,8 @@
 <?php
 
-use Rector\CodeQuality\Rector\FuncCall\SimplifyRegexPatternRector;
 use Rector\CodingStyle\Rector\FuncCall\CallUserFuncArrayToVariadicRector;
-use Rector\CodingStyle\Rector\FuncCall\ConsistentPregDelimiterRector;
 use Rector\Core\Configuration\Option;
 use Rector\Core\ValueObject\PhpVersion;
-use Rector\Php73\Rector\FuncCall\RegexDashEscapeRector;
 use Rector\Set\ValueObject\SetList;
 use Rector\TypeDeclaration\Rector\ClassMethod\ReturnTypeFromStrictTypedPropertyRector;
 use Rector\TypeDeclaration\Rector\Param\ParamTypeFromStrictTypedPropertyRector;
@@ -34,8 +31,5 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ReturnTypeFromStrictTypedPropertyRector::class,
         TypedPropertyFromStrictConstructorRector::class,
         ParamTypeFromStrictTypedPropertyRector::class,
-
-        // some that no need escaped, eg: $# escaped to \$#
-        ConsistentPregDelimiterRector::class,
     ]);
 };

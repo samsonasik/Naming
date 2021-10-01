@@ -84,7 +84,7 @@ class Naming extends AbstractValidator
         Assert::string($value);
         $this->setValue($value);
 
-        $specs = preg_match("/^[-. '\p{L}]+$/u", $value);
+        $specs = preg_match("#^[-. '\p{L}]+$#u", $value);
         if (! $specs) {
             $this->error(self::SPECIAL_OR_NUMBER);
             return false;
@@ -119,7 +119,7 @@ class Naming extends AbstractValidator
             }
         }
 
-        $specs = preg_match("/(?:\.['\p{L}-]+|\s\.|^\.)/u", $value);
+        $specs = preg_match("#(?:\.['\p{L}-]+|\s\.|^\.)#u", $value);
         if ($specs) {
             $this->error(self::DOT_TOBE_IN_LAST_WORD);
             return false;

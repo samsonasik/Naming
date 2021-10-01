@@ -25,7 +25,7 @@ class Naming extends AbstractFilter
         $value = (new StripTags())->filter($value);
         $value = (new StringTrim())->filter($value);
         $value = mb_convert_case($value, MB_CASE_TITLE, 'UTF-8');
-        $value = preg_replace('/\s{2,}/', ' ', $value);
+        $value = preg_replace('#\s{2,}#', ' ', $value);
 
         Assert::string($value);
 

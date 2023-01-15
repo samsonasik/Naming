@@ -4,19 +4,15 @@ declare(strict_types=1);
 
 namespace Naming\Validator;
 
-use ArrayLookup\AtLeast;
 use ArrayLookup\Finder;
 use Laminas\Validator\AbstractValidator;
 use Webmozart\Assert\Assert;
 
-use function array_filter;
 use function array_key_exists;
-use function current;
+use function is_string;
 use function mb_strlen;
 use function preg_match;
 use function str_contains;
-
-use const ARRAY_FILTER_USE_KEY;
 
 final class Naming extends AbstractValidator
 {
@@ -112,7 +108,7 @@ final class Naming extends AbstractValidator
             ];
 
             $filter = static fn(string $datum, string $key): bool => str_contains($value, $key);
-            $error = Finder::first($messageTemplates, $filter);
+            $error  = Finder::first($messageTemplates, $filter);
 
             if (is_string($error)) {
                 $this->error($error);

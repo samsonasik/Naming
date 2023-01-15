@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Naming\Validator;
 
+use ArrayLookup\AtLeast;
+use ArrayLookup\Finder;
 use Laminas\Validator\AbstractValidator;
 use Webmozart\Assert\Assert;
 
@@ -109,14 +111,11 @@ final class Naming extends AbstractValidator
                 "''" => self::CONSECUTIVE_APOSTROPHE,
             ];
 
-            $error = array_filter(
-                $messageTemplates,
-                static fn($key): bool => str_contains($value, $key),
-                ARRAY_FILTER_USE_KEY
-            );
+            $filter = static fn(string $datum, string $key): bool => str_contains($value, $key);
+            $error = Finder::first($messageTemplates, $filter);
 
-            if ($error !== []) {
-                $this->error(current($error));
+            if (is_string($error)) {
+                $this->error($error);
                 return false;
             }
         }

@@ -24,6 +24,7 @@
         "php": "^8.1",
         "laminas/laminas-filter": "^2.31",
         "laminas/laminas-validator": "^2.29",
+        "samsonasik/array-lookup": "*",
         "symfony/polyfill-mbstring": "^1.27",
         "webmozart/assert": "^1.11"
     },

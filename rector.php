@@ -1,35 +1,30 @@
 <?php
 
-use Rector\CodingStyle\Rector\FuncCall\CallUserFuncArrayToVariadicRector;
-use Rector\Core\Configuration\Option;
-use Rector\Core\ValueObject\PhpVersion;
+use Rector\CodingStyle\Rector\ArrowFunction\StaticArrowFunctionRector;
+use Rector\CodingStyle\Rector\Closure\StaticClosureRector;
+use Rector\Php81\Rector\FuncCall\NullToStrictStringFuncCallArgRector;
 use Rector\Set\ValueObject\SetList;
-use Rector\TypeDeclaration\Rector\ClassMethod\ReturnTypeFromStrictTypedPropertyRector;
-use Rector\TypeDeclaration\Rector\Param\ParamTypeFromStrictTypedPropertyRector;
-use Rector\TypeDeclaration\Rector\Property\TypedPropertyFromStrictConstructorRector;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Rector\Set\ValueObject\LevelSetList;
+use Rector\Config\RectorConfig;
 
-return static function (ContainerConfigurator $containerConfigurator): void {
-    $containerConfigurator->import(SetList::CODING_STYLE);
-    $containerConfigurator->import(SetList::PHP_70);
-    $containerConfigurator->import(SetList::PHP_71);
-    $containerConfigurator->import(SetList::PHP_72);
-    $containerConfigurator->import(SetList::PHP_73);
-    $containerConfigurator->import(SetList::CODE_QUALITY);
-    $containerConfigurator->import(SetList::TYPE_DECLARATION);
-    $containerConfigurator->import(SetList::TYPE_DECLARATION_STRICT);
+return static function (RectorConfig $rectorConfig): void {
+    $rectorConfig->sets([
+        SetList::CODING_STYLE,
+        LevelSetList::UP_TO_PHP_81,
+        SetList::CODE_QUALITY,
+        SetList::TYPE_DECLARATION
+    ]);
 
-    $parameters = $containerConfigurator->parameters();
-    $parameters->set(Option::PATHS, [__DIR__ . '/src', __DIR__ . '/spec']);
+    $rectorConfig->paths([__DIR__ . '/src', __DIR__ . '/spec', __FILE__]);
+    $rectorConfig->importNames();
 
-    $parameters->set(Option::AUTO_IMPORT_NAMES, true);
-    $parameters->set(Option::PHP_VERSION_FEATURES, PhpVersion::PHP_73);
-
-    $parameters->set(Option::SKIP, [
-        // requires php 7.4
-        CallUserFuncArrayToVariadicRector::class,
-        ReturnTypeFromStrictTypedPropertyRector::class,
-        TypedPropertyFromStrictConstructorRector::class,
-        ParamTypeFromStrictTypedPropertyRector::class,
+    $rectorConfig->skip([
+        NullToStrictStringFuncCallArgRector::class,
+        StaticArrowFunctionRector::class => [
+            __DIR__ . '/spec',
+        ],
+        StaticClosureRector::class => [
+            __DIR__ . '/spec',
+        ]
     ]);
 };

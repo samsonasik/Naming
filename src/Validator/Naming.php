@@ -4,59 +4,57 @@ declare(strict_types=1);
 
 namespace Naming\Validator;
 
+use ArrayLookup\Finder;
 use Laminas\Validator\AbstractValidator;
 use Webmozart\Assert\Assert;
 
-use function array_filter;
 use function array_key_exists;
-use function current;
+use function is_string;
 use function mb_strlen;
 use function preg_match;
-use function strpos;
+use function str_contains;
 
-use const ARRAY_FILTER_USE_KEY;
-
-class Naming extends AbstractValidator
+final class Naming extends AbstractValidator
 {
     /**
      * @var string
      */
-    public const SPECIAL_OR_NUMBER = 'SPECIAL_OR_NUMBER';
+    private const SPECIAL_OR_NUMBER = 'SPECIAL_OR_NUMBER';
 
     /**
      * @var string
      */
-    public const SINGLE_DOT = 'SINGLE_DOT';
+    private const SINGLE_DOT = 'SINGLE_DOT';
 
     /**
      * @var string
      */
-    public const SINGLE_HYPHEN = 'SINGLE_HYPHEN';
+    private const SINGLE_HYPHEN = 'SINGLE_HYPHEN';
 
     /**
      * @var string
      */
-    public const SINGLE_APOSTROPHE = 'SINGLE_APOSTROPHE';
+    private const SINGLE_APOSTROPHE = 'SINGLE_APOSTROPHE';
 
     /**
      * @var string
      */
-    public const CONSECUTIVE_DOT = 'CONSECUTIVE_DOT';
+    private const CONSECUTIVE_DOT = 'CONSECUTIVE_DOT';
 
     /**
      * @var string
      */
-    public const CONSECUTIVE_HYPHEN = 'CONSECUTIVE_HYPHEN';
+    private const CONSECUTIVE_HYPHEN = 'CONSECUTIVE_HYPHEN';
 
     /**
      * @var string
      */
-    public const CONSECUTIVE_APOSTROPHE = 'CONSECUTIVE_APOSTROPHE';
+    private const CONSECUTIVE_APOSTROPHE = 'CONSECUTIVE_APOSTROPHE';
 
     /**
      * @var string
      */
-    public const DOT_TOBE_IN_LAST_WORD = 'DOT_TOBE_IN_LAST_WORD';
+    private const DOT_TOBE_IN_LAST_WORD = 'DOT_TOBE_IN_LAST_WORD';
 
     /** @var array<string, string> */
     protected $messageTemplates = [
@@ -109,12 +107,11 @@ class Naming extends AbstractValidator
                 "''" => self::CONSECUTIVE_APOSTROPHE,
             ];
 
-            $error = array_filter($messageTemplates, function ($key) use ($value): bool {
-                return strpos($value, $key) !== false;
-            }, ARRAY_FILTER_USE_KEY);
+            $filter = static fn(string $datum, string $key): bool => str_contains($value, $key);
+            $error  = Finder::first($messageTemplates, $filter);
 
-            if ($error !== []) {
-                $this->error(current($error));
+            if (is_string($error)) {
+                $this->error($error);
                 return false;
             }
         }

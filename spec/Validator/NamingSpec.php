@@ -4,13 +4,9 @@ namespace Naming\Spec\Validator;
 
 use Naming\Validator\Naming;
 
-describe('Naming', function () {
+describe('Naming', function (): void {
 
-    given('validator', function () {
-
-       return new Naming();
-
-    });
+    given('validator', fn(): Naming => new Naming());
 
     describe('->isValid', function (): void {
 

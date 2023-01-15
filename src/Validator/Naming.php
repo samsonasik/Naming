@@ -12,7 +12,7 @@ use function array_key_exists;
 use function current;
 use function mb_strlen;
 use function preg_match;
-use function strpos;
+use function str_contains;
 
 use const ARRAY_FILTER_USE_KEY;
 
@@ -109,7 +109,11 @@ final class Naming extends AbstractValidator
                 "''" => self::CONSECUTIVE_APOSTROPHE,
             ];
 
-            $error = array_filter($messageTemplates, static fn($key): bool => str_contains($value, $key), ARRAY_FILTER_USE_KEY);
+            $error = array_filter(
+                $messageTemplates,
+                static fn($key): bool => str_contains($value, $key),
+                ARRAY_FILTER_USE_KEY
+            );
 
             if ($error !== []) {
                 $this->error(current($error));

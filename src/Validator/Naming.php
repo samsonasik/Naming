@@ -16,47 +16,47 @@ use function strpos;
 
 use const ARRAY_FILTER_USE_KEY;
 
-class Naming extends AbstractValidator
+final class Naming extends AbstractValidator
 {
     /**
      * @var string
      */
-    public const SPECIAL_OR_NUMBER = 'SPECIAL_OR_NUMBER';
+    private const SPECIAL_OR_NUMBER = 'SPECIAL_OR_NUMBER';
 
     /**
      * @var string
      */
-    public const SINGLE_DOT = 'SINGLE_DOT';
+    private const SINGLE_DOT = 'SINGLE_DOT';
 
     /**
      * @var string
      */
-    public const SINGLE_HYPHEN = 'SINGLE_HYPHEN';
+    private const SINGLE_HYPHEN = 'SINGLE_HYPHEN';
 
     /**
      * @var string
      */
-    public const SINGLE_APOSTROPHE = 'SINGLE_APOSTROPHE';
+    private const SINGLE_APOSTROPHE = 'SINGLE_APOSTROPHE';
 
     /**
      * @var string
      */
-    public const CONSECUTIVE_DOT = 'CONSECUTIVE_DOT';
+    private const CONSECUTIVE_DOT = 'CONSECUTIVE_DOT';
 
     /**
      * @var string
      */
-    public const CONSECUTIVE_HYPHEN = 'CONSECUTIVE_HYPHEN';
+    private const CONSECUTIVE_HYPHEN = 'CONSECUTIVE_HYPHEN';
 
     /**
      * @var string
      */
-    public const CONSECUTIVE_APOSTROPHE = 'CONSECUTIVE_APOSTROPHE';
+    private const CONSECUTIVE_APOSTROPHE = 'CONSECUTIVE_APOSTROPHE';
 
     /**
      * @var string
      */
-    public const DOT_TOBE_IN_LAST_WORD = 'DOT_TOBE_IN_LAST_WORD';
+    private const DOT_TOBE_IN_LAST_WORD = 'DOT_TOBE_IN_LAST_WORD';
 
     /** @var array<string, string> */
     protected $messageTemplates = [
@@ -109,9 +109,7 @@ class Naming extends AbstractValidator
                 "''" => self::CONSECUTIVE_APOSTROPHE,
             ];
 
-            $error = array_filter($messageTemplates, function ($key) use ($value): bool {
-                return strpos($value, $key) !== false;
-            }, ARRAY_FILTER_USE_KEY);
+            $error = array_filter($messageTemplates, static fn($key): bool => str_contains($value, $key), ARRAY_FILTER_USE_KEY);
 
             if ($error !== []) {
                 $this->error(current($error));

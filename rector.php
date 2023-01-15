@@ -1,6 +1,7 @@
 <?php
 
 use Rector\CodingStyle\Rector\ArrowFunction\StaticArrowFunctionRector;
+use Rector\CodingStyle\Rector\Closure\StaticClosureRector;
 use Rector\Php81\Rector\FuncCall\NullToStrictStringFuncCallArgRector;
 use Rector\Set\ValueObject\SetList;
 use Rector\Set\ValueObject\LevelSetList;
@@ -20,6 +21,9 @@ return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->skip([
         NullToStrictStringFuncCallArgRector::class,
         StaticArrowFunctionRector::class => [
+            __DIR__ . '/spec',
+        ],
+        StaticClosureRector::class => [
             __DIR__ . '/spec',
         ]
     ]);

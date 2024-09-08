@@ -2,7 +2,8 @@ includes:
 	- vendor/phpstan/phpstan-webmozart-assert/extension.neon
 
 parameters:
-    checkGenericClassInNonGenericObjectType: false
-
     ignoreErrors:
         - '#Parameter \#2 \$filter of static method ArrayLookup\\Finder\:\:first\(\) expects callable\(mixed, int\|string\|null=\): bool, Closure\(string, string\): bool given#'
+        -
+            identifier: missingType.generics
+            path: src/Filter/Naming.php

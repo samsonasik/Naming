@@ -46,6 +46,9 @@ final class Naming implements FilterInterface
         return $value;
     }
 
+    /**
+     * @param string $value
+     */
     public function __invoke(mixed $value): string
     {
         return $this->filter($value);

@@ -69,7 +69,7 @@ final class Naming extends AbstractValidator
     ];
 
     /** @param string $value */
-    public function isValid($value): bool
+    public function isValid(mixed $value): bool
     {
         Assert::string($value);
         $this->setValue($value);

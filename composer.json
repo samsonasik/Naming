@@ -30,7 +30,7 @@
     },
     "require-dev": {
         "kahlan/kahlan": "^5.2.2",
-        "laminas/laminas-coding-standard": "^2.5",
+        "laminas/laminas-coding-standard": "^3.0",
         "php-coveralls/php-coveralls": "^2.5.3",
         "phpstan/phpstan": "^2.0",
         "phpstan/phpstan-webmozart-assert": "^2.0",

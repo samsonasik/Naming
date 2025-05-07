@@ -23,7 +23,7 @@ describe('Naming', function (): void {
 
             $naming = new Naming();
             foreach ($maps as $key => $value) {
-                expect($naming->filter($key))->toBe($value);
+                expect($naming($key))->toBe($value);
             }
 
         });

@@ -57,7 +57,7 @@ final class Naming extends AbstractValidator
     private const DOT_TOBE_IN_LAST_WORD = 'DOT_TOBE_IN_LAST_WORD';
 
     /** @var array<string, string> */
-    protected $messageTemplates = [
+    protected array $messageTemplates = [
         self::SPECIAL_OR_NUMBER      => 'Names can contain only letters, hyphens, apostrophe, spaces & full stops',
         self::SINGLE_DOT             => 'Single "." character is not allowed',
         self::SINGLE_HYPHEN          => 'Single "-" character is not allowed',
@@ -69,7 +69,7 @@ final class Naming extends AbstractValidator
     ];
 
     /** @param string $value */
-    public function isValid($value): bool
+    public function isValid(mixed $value): bool
     {
         Assert::string($value);
         $this->setValue($value);
@@ -99,7 +99,8 @@ final class Naming extends AbstractValidator
                 "''" => self::CONSECUTIVE_APOSTROPHE,
             ];
 
-            $filter = static fn(string $datum, string $key): bool => str_contains($value, $key);
+            $filter = static fn(mixed $datum, int|string|null $key): bool
+                => is_string($key) && str_contains($value, $key);
             $error  = Finder::first($messageTemplates, $filter);
 
             if (is_string($error)) {

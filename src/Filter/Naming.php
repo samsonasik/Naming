@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Naming\Filter;
 
-use Laminas\Filter\AbstractFilter;
+use Laminas\Filter\FilterInterface;
 use Laminas\Filter\StringTrim;
 use Laminas\Filter\StripTags;
 use Webmozart\Assert\Assert;
@@ -17,12 +17,12 @@ use function preg_replace;
 
 use const MB_CASE_TITLE;
 
-final class Naming extends AbstractFilter
+final class Naming implements FilterInterface
 {
     /**
      * @param string $value
      */
-    public function filter($value): string
+    public function filter(mixed $value): string
     {
         $value = (new StripTags())->filter($value);
         $value = (new StringTrim())->filter($value);
@@ -44,5 +44,13 @@ final class Naming extends AbstractFilter
 
         Assert::string($value);
         return $value;
+    }
+
+    /**
+     * @param string $value
+     */
+    public function __invoke(mixed $value): string
+    {
+        return $this->filter($value);
     }
 }

@@ -99,7 +99,7 @@ final class Naming extends AbstractValidator
                 "''" => self::CONSECUTIVE_APOSTROPHE,
             ];
 
-            $filter = static fn(mixed $datum, int|string|null $key): bool
+            $filter = static fn(mixed $datum, int|string|null $key = null): bool
                 => is_string($key) && str_contains($value, $key);
             $error  = Finder::first($messageTemplates, $filter);
 

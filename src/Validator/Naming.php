@@ -19,7 +19,7 @@ final class Naming extends AbstractValidator
     /**
      * @var string
      */
-    private const MUST_CONTAIN_LETTER = 'MUST_CONTAIN_LETTER';
+    private const NO_LETTER = 'NO_LETTER';
 
     /**
      * @var string
@@ -63,7 +63,7 @@ final class Naming extends AbstractValidator
 
     /** @var array<string, string> */
     protected array $messageTemplates = [
-        self::MUST_CONTAIN_LETTER    => 'Name must contain at least one letter',
+        self::NO_LETTER              => 'Names must contain at least one letter',
         self::SPECIAL_OR_NUMBER      => 'Names can contain only letters, hyphens, apostrophe, spaces & full stops',
         self::SINGLE_DOT             => 'Single "." character is not allowed',
         self::SINGLE_HYPHEN          => 'Single "-" character is not allowed',
@@ -123,7 +123,7 @@ final class Naming extends AbstractValidator
         }
 
         if (! preg_match('#\p{L}#u', $value)) {
-            $this->error(self::MUST_CONTAIN_LETTER);
+            $this->error(self::NO_LETTER);
             return false;
         }
 

@@ -10,9 +10,11 @@ use Laminas\Filter\StripTags;
 use Webmozart\Assert\Assert;
 
 use function mb_convert_case;
+use function mb_strlen;
 use function mb_strtoupper;
 use function preg_replace;
 use function preg_replace_callback;
+use function str_ends_with;
 
 use const MB_CASE_TITLE;
 
@@ -31,14 +33,24 @@ final class Naming implements FilterInterface
         $value = mb_convert_case($value, MB_CASE_TITLE, 'UTF-8');
         $value = preg_replace('#\s{2,}#', ' ', $value);
 
+        Assert::string($value);
+
         // Ensure the letter after apostrophe/hyphen is uppercase (Unicode-safe)
         $value = preg_replace_callback(
-            "/(['-])(\\p{L})/u",
-            static fn(array $matches): string => $matches[1] . mb_strtoupper($matches[2], 'UTF-8'),
-            (string) $value
+            "/(?<=^|\s)(\p{L}+'?)(\p{Ll})/u",
+            function ($matches) {
+                // only uppercase if it's single-letter prefix like D' or O'
+                if (mb_strlen($matches[1], 'UTF-8') === 2 && str_ends_with($matches[1], "'")) {
+                    return $matches[1] . mb_strtoupper($matches[2], 'UTF-8');
+                }
+
+                return $matches[1] . $matches[2];
+            },
+            $value
         );
 
         Assert::string($value);
+
         return $value;
     }
 

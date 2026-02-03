@@ -19,6 +19,11 @@ final class Naming extends AbstractValidator
     /**
      * @var string
      */
+    private const MUST_CONTAIN_LETTER = 'MUST_CONTAIN_LETTER';
+
+    /**
+     * @var string
+     */
     private const SPECIAL_OR_NUMBER = 'SPECIAL_OR_NUMBER';
 
     /**
@@ -58,6 +63,7 @@ final class Naming extends AbstractValidator
 
     /** @var array<string, string> */
     protected array $messageTemplates = [
+        self::MUST_CONTAIN_LETTER    => 'Name must contain at least one letter',
         self::SPECIAL_OR_NUMBER      => 'Names can contain only letters, hyphens, apostrophe, spaces & full stops',
         self::SINGLE_DOT             => 'Single "." character is not allowed',
         self::SINGLE_HYPHEN          => 'Single "-" character is not allowed',
@@ -81,7 +87,7 @@ final class Naming extends AbstractValidator
             return false;
         }
 
-        $length = mb_strlen($value);
+        $length = mb_strlen($value, 'UTF-8');
         if ($length === 1) {
             $messageTemplates = [
                 '.' => self::SINGLE_DOT,
@@ -113,6 +119,11 @@ final class Naming extends AbstractValidator
         $specs = preg_match("#(?:\.['\p{L}-]+|\s\.|^\.)#u", $value);
         if ($specs) {
             $this->error(self::DOT_TOBE_IN_LAST_WORD);
+            return false;
+        }
+
+        if (! preg_match('#\p{L}#u', $value)) {
+            $this->error(self::MUST_CONTAIN_LETTER);
             return false;
         }
 

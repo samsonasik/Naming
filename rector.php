@@ -12,6 +12,9 @@ return RectorConfig::configure()
     ->withImportNames(removeUnusedImports: true)
     ->withSkip([
         NullToStrictStringFuncCallArgRector::class,
+        StaticClosureRector::class => [
+            __DIR__ . '/spec',
+        ]
     ])
     ->withRules([
         StaticClosureRector::class,

@@ -4,11 +4,11 @@ namespace Naming\Spec\Filter;
 
 use Naming\Filter\Naming;
 
-describe('Naming', static function (): void {
+describe('Naming', function (): void {
 
-    describe('filter()', static function (): void {
+    describe('filter()', function (): void {
 
-        it('set striptags, trim, and strip double space with ucwords with set lower first, upper after apostrophe and hyphen', static function (): void {
+        it('set striptags, trim, and strip double space with ucwords with set lower first, upper after apostrophe and hyphen', function (): void {
 
             $maps = [
                 ''                  => '',

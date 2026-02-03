@@ -38,7 +38,7 @@ final class Naming implements FilterInterface
         // Ensure the letter after apostrophe/hyphen is uppercase (Unicode-safe)
         $value = preg_replace_callback(
             "/(?<=^|\s)(\p{L}+'?)(\p{Ll})/u",
-            function ($matches) {
+            static function ($matches): string {
                 // only uppercase if it's single-letter prefix like D' or O'
                 if (mb_strlen($matches[1], 'UTF-8') === 2 && str_ends_with($matches[1], "'")) {
                     return $matches[1] . mb_strtoupper($matches[2], 'UTF-8');

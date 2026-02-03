@@ -1,5 +1,6 @@
 <?php
 
+use Rector\CodingStyle\Rector\Closure\StaticClosureRector;
 use Rector\Php81\Rector\FuncCall\NullToStrictStringFuncCallArgRector;
 use Rector\Config\RectorConfig;
 
@@ -11,4 +12,7 @@ return RectorConfig::configure()
     ->withImportNames(removeUnusedImports: true)
     ->withSkip([
         NullToStrictStringFuncCallArgRector::class,
+    ])
+    ->withRules([
+        StaticClosureRector::class,
     ]);

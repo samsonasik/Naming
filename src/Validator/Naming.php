@@ -72,6 +72,7 @@ final class Naming extends AbstractValidator
     public function isValid(mixed $value): bool
     {
         Assert::string($value);
+
         $this->setValue($value);
 
         $specs = preg_match("#^[-. '\p{L}]+$#u", $value);

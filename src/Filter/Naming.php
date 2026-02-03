@@ -25,18 +25,16 @@ final class Naming implements FilterInterface
      */
     public function filter(mixed $value): string
     {
+        Assert::string($value);
+
         $value = (new StripTags())->filter($value);
         $value = (new StringTrim())->filter($value);
 
-        Assert::string($value);
-
         $value = mb_convert_case($value, MB_CASE_TITLE, 'UTF-8');
-        $value = preg_replace('#\s{2,}#', ' ', $value);
-
-        Assert::string($value);
+        $value = (string) preg_replace('#\s{2,}#', ' ', $value);
 
         // Ensure the letter after apostrophe/hyphen is uppercase (Unicode-safe)
-        $value = preg_replace_callback(
+        $value = (string) preg_replace_callback(
             "/(?<=^|\s)(\p{L}+'?)(\p{Ll})/u",
             static function (array $matches): string {
                 // only uppercase if it's single-letter prefix like D' or O'
@@ -48,8 +46,6 @@ final class Naming implements FilterInterface
             },
             $value
         );
-
-        Assert::string($value);
 
         return $value;
     }

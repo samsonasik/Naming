@@ -19,6 +19,8 @@ describe('Naming', function (): void {
                 "D'lilah"         => "D'Lilah",
                 'äX'               => 'Äx',
                 'Veli-matti'       => 'Veli-Matti',
+                "d'äx"            => "D'Äx",
+                'anna-maria-louise' => 'Anna-Maria-Louise',
             ];
 
             $naming = new Naming();

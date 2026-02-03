@@ -9,11 +9,10 @@ use Laminas\Filter\StringTrim;
 use Laminas\Filter\StripTags;
 use Webmozart\Assert\Assert;
 
-use function array_walk;
 use function mb_convert_case;
-use function mb_strpos;
 use function mb_strtoupper;
 use function preg_replace;
+use function preg_replace_callback;
 
 use const MB_CASE_TITLE;
 
@@ -32,15 +31,12 @@ final class Naming implements FilterInterface
         $value = mb_convert_case($value, MB_CASE_TITLE, 'UTF-8');
         $value = preg_replace('#\s{2,}#', ' ', $value);
 
-        $chars = ["'", '-'];
-        array_walk($chars, static function ($row) use (&$value): void {
-            Assert::string($value);
-
-            $position = mb_strpos($value, $row);
-            if ($position !== false && isset($value[$position + 1])) {
-                $value[$position + 1] = mb_strtoupper($value[$position + 1]);
-            }
-        });
+        // Ensure the letter after apostrophe/hyphen is uppercase (Unicode-safe)
+        $value = preg_replace_callback(
+            "/(['-])(\\p{L})/u",
+            static fn(array $matches): string => $matches[1] . mb_strtoupper($matches[2], 'UTF-8'),
+            $value
+        );
 
         Assert::string($value);
         return $value;

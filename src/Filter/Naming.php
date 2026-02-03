@@ -35,7 +35,7 @@ final class Naming implements FilterInterface
         $value = preg_replace_callback(
             "/(['-])(\\p{L})/u",
             static fn(array $matches): string => $matches[1] . mb_strtoupper($matches[2], 'UTF-8'),
-            $value
+            (string) $value
         );
 
         Assert::string($value);

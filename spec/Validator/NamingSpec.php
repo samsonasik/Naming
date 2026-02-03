@@ -13,6 +13,12 @@ describe('Naming', function (): void {
         it('returns false for incorrect naming', function (): void {
 
             $namings = [
+                // no letter
+                ' ',
+                '   ',
+                ' - ',
+                '- -',
+
                 // include special character(s)
                 '~~',
                 'abdul%',
@@ -38,6 +44,9 @@ describe('Naming', function (): void {
                 "''",
                 '...',
                 'Foo.....',
+
+                // invalid characters
+                '<>'
             ];
 
             foreach ($namings as $naming) {
@@ -57,6 +66,7 @@ describe('Naming', function (): void {
                 "D'Lilah",
                 'Veli-Matti',
                 'Setälä',
+                'X Æ A-Xii',
             ];
 
             foreach ($namings as $naming) {

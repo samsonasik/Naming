@@ -42,6 +42,7 @@ Validation checks
 
 - Allowed characters: letters, hyphens, apostrophe, spaces, full stops.
 - Not allowed:
+   - no letter, eg: ` - `
    - include number
    - special characters
    - single `.` character

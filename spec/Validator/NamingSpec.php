@@ -6,7 +6,7 @@ use Naming\Validator\Naming;
 
 describe('Naming', function (): void {
 
-    given('validator', fn(): Naming => new Naming());
+    given('validator', static fn(): Naming => new Naming());
 
     describe('->isValid', function (): void {
 

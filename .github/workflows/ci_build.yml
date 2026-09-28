@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-versions: ['8.1', '8.2', '8.3', '8.4', '8.5']
+        php-versions: ['8.2', '8.3', '8.4', '8.5']
         dependency-version: ['lowest', 'latest']
     steps:
       - name: Setup PHP Action
@@ -35,9 +35,11 @@ jobs:
       - name: "CS Check"
         run: "composer cs-check"
       - name: "Code analyze"
-        run: "bin/phpstan analyse src/ --level=max -c phpstan.neon"
+        run: |
+          vendor/bin/phpstan analyse src/ --level=max -c phpstan.neon
+          vendor/bin/structarmed analyze
       - name: "Run test suite"
-        run: "mkdir -p build/logs && bin/kahlan --coverage=4 --reporter=verbose --clover=build/logs/clover.xml"
+        run: "mkdir -p build/logs && vendor/bin/kahlan --coverage=4 --reporter=verbose --clover=build/logs/clover.xml"
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
         with:

@@ -35,7 +35,9 @@ jobs:
       - name: "CS Check"
         run: "composer cs-check"
       - name: "Code analyze"
-        run: "bin/phpstan analyse src/ --level=max -c phpstan.neon"
+        run: |
+          "bin/phpstan analyse src/ --level=max -c phpstan.neon"
+          "bin/structarmed analyze"
       - name: "Run test suite"
         run: "mkdir -p build/logs && bin/kahlan --coverage=4 --reporter=verbose --clover=build/logs/clover.xml"
       - name: Upload coverage to Codecov
